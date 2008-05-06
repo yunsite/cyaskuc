@@ -1,0 +1,15 @@
+#labels Featured
+#关于Cyask 3.0 for UCenter1.0 系统
+
+= Introduction =
+
+    由于工作的原因，需要整合一些列的站点，其中就包括了DZ,ECSHOP和ASK，而正值UCenter（一下简称UC）推出，通过对UC的测试，发现UC的跨站同步登录问题做的不错。而各个方面基本也满足要求，所以推荐领导采用UC方案进行系统整合。
+    于是对CYASK进行开发，势在必行。
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
