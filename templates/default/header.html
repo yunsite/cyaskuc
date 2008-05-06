@@ -1,0 +1,110 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<title>{$title}</title>
+<meta content="{lang meta_description}" name="description" />
+<meta content="{lang meta_keywords}" name="keywords" />
+<meta content="{lang meta_author}" name="author" />
+<link href="{$web_path}{$styledir}/1000ask.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="{$web_path}js/base.js"></script>
+<script type="text/javascript" src="{$web_path}include/functions.js"></script>
+<script type="text/javascript" src="{$web_path}include/xmlhttp.{$charset}.js"></script>
+<script type="text/javascript">
+function limit_words(varfield,obj_str,limit_len)
+{
+    var leftchars = get_left_chars(varfield,limit_len);
+    if (leftchars >= 0)
+    {   
+    	return true;
+    }
+    else
+    {
+       ls_str = {lang warning_info_lang};
+       window.alert(ls_str);
+       return false;     
+    } 
+    return true;
+}
+function search_submit()
+{
+	if(document.wordform.word.value=="" || document.wordform.word.value.length<2)
+    {
+		document.wordform.word.focus();
+		alert("{lang warning_ques_mistake}");
+		return false;
+	}
+	var word=document.wordform.word.value;
+	location.href="{$web_path}search.php?word="+word;
+}
+function parse_message(data)
+{
+	var did=document.getElementById("newmessagetip");
+	if(data)
+	{
+		
+		if(data<1)
+		{
+			did.innerHTML='';
+		}
+		else
+		{
+			did.innerHTML='&nbsp;&nbsp;<a href="my.php?command=mymessage"><font size="2" color="red">{lang menu_have_newmsg}('+data+')</font></a>&nbsp;&nbsp;';
+		}
+	}
+	else
+	{
+		did.innerHTML='<font size="2" color="red">{lang warning_msg_cheching}</font>';
+	}
+}
+</script>
+</head>
+<body>
+<div id="main">
+<div id="usrbar">
+<nobr>
+<script type="text/javascript">
+<!--
+var now = new Date();
+var hours = now.getHours();
+if(hours < 6){document.write("{lang welcome_daybreak}")}
+else if (hours < 9){document.write("{lang welcome_morning}")}
+else if (hours < 12){document.write("{lang welcome_morning2}")}
+else if (hours < 14){document.write("{lang welcome_noon}")}
+else if (hours < 17){document.write("{lang welcome_afternoon}")}
+else if (hours < 19){document.write("{lang welcome_evening}")}
+else if (hours < 22){document.write("{lang welcome_evening2}")}
+else {document.write("{lang welcome_night}")}
+var cyask_user='{$cyask_user}';
+if(cyask_user)
+{
+	document.write('<span id="newmessagetip"></span>&nbsp;<b>'+cyask_user+'</b>&nbsp;&nbsp;<a href="{$web_path}my.php">{lang menu_usercenter}</a>&nbsp;|&nbsp;<a href="{$web_path}login.php?command=logout&url='+StrCode(location.href)+'">{lang button_logout}</a>');
+	XMLHttp.getR('{$web_path}msgcheck.php',parse_message,'text');
+	var adminid={$cyask_adminid};
+	if(adminid==1)
+	{
+		document.write('&nbsp;|&nbsp;<a href="{$web_path}admin.php">{lang menu_admincenter}</a>');
+	}
+}
+else
+{document.write('&nbsp;<a href="{$web_path}login.php?command=login&url='+StrCode(location.href)+'">{lang button_login}</a>&nbsp;|&nbsp;<a href="{$web_path}register.php?url='+StrCode(location.href)+'">{lang button_regist}</a>');}
+// -->
+</script>
+</nobr>
+</div>
+<div id="head">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td valign="top" width="160"><a href="{$web_path}"><img src="{$web_path}{$styledir}/1000ask.gif" border="0" /></a></td>
+<td width="390">
+<div class="Tit"><span class="B">{lang menu_cyask}</span></div>
+<form name="wordform" action="{$web_path}ask.php" method="get">
+<input name="word" class="formfont" tabIndex="1" maxLength="50" size="42" />
+<br />{lang menu_ques_example} <br />
+<input type="submit" value="{lang button_go_ask}" /> 
+<input type="button" value="{lang button_search_answer}" onClick="search_submit();" />
+</form>  
+</td>
+<td><font size="2">{lang menu_description}</font></td>
+</tr>
+</table>
+</div>
+<br />
