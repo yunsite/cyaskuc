@@ -1,0 +1,33 @@
+{template header}
+<div id="middle">
+<div id="path"><a href="./">{$site_name}</a> &gt;&gt;
+<!--{if $type=='week'}-->{lang menu_week_scorelist}
+<!--{elseif $type=='month'}-->{lang menu_month_scorelist}
+<!--{else}-->{lang menu_all_scorelist}<!--{/if}--></div>
+<div id="c90">
+<div class="t3 bcg"><div class="t3t bgg">{lang menu_all_scorelist}</div></div>
+<div class="b3 bcg mb12">
+<div class="w100">
+<table class="tlp4" id="tl" cellspacing="0" width="100%" border="0">
+<tr>
+	<td class="nl" nowrap="nowrap" align="center" height="30" width="5%">&nbsp;&nbsp;{lang menu_list}</td>
+	<td class="nl" nowrap="nowrap" align="center" width="15%">{lang menu_username}</td>
+	<td class="nl" nowrap="nowrap" align="center" width="5%">{lang menu_gender}</td>
+	<td class="nl" nowrap="nowrap" align="center" width="10%">{lang menu_score}</td>
+	<td class="nl" nowrap="nowrap" align="center" width="20%">{lang menu_regdate}</td>
+	</tr>
+<!--{loop $members_list $members}-->
+<tr>
+	<td align=center>{$members['orderid']}</td>
+	<td align=center><a href="{$web_path}member.php?uid={$members['uid']}" target="_blank">{$members['username']}</a></td>
+	<td align=center><!--{if $members['gender']==1}-->{lang menu_man}<!--{elseif $members['gender']==2}-->{lang menu_woman}<!--{else}-->{lang menu_baomi}<!--{/if}--></td>
+	<td align=center>{$members['score']}</td>
+	<td align=center>{$members['regdate']}</td>
+	</tr>
+<!--{/loop}-->
+</table>
+</div>
+</div>
+</div>
+<br />
+{template footer}

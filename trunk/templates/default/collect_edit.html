@@ -1,0 +1,59 @@
+{template header}
+<div id="middle">
+<div id="c90">
+<div class="t3 bcb"><div class="t3t bgb">{lang button_to_collect}</div></div>
+<div class="b3 bcb mb12">
+<div class="w100">
+<br />
+<form name="collectForm" action="collect.php" method="post">
+<table cellspacing="0" cellpadding="0" width="100%" border="0">
+<tr valign="middle">
+<td width="10%" height="35" class="f14">{lang menu_collect_url}:</td>
+<td width="90%"><input type="text" name="collect_url" size="70" value="{$collect_url}" readonly="true" /></td></tr>
+<tr valign="middle">
+<td width="10%" height="50" class="f14">{lang menu_collect_title}:</td>
+<td width="90%" class="f14b"><input type="text" name="collect_title" size="70" maxlength="48" value="{$collect_title}" /></td></tr>
+<!--{if $neturl}-->
+<tr valign="middle">
+<td width="10%" height="50" class="f14">{lang menu_collect_content}:</td>
+<td width="90%">
+<input type="hidden" name="content" value="{$collect_content}">
+<script type="text/javascript" src="cyaskeditor/CyaskEditor_<?=$charset?>.js"></script>
+<script type="text/javascript">
+var editor = new CyaskEditor("editor");
+editor.hiddenName = "content";
+editor.editorType = "simple";
+editor.editorWidth = "550px";
+editor.editorHeight = "286px";
+editor.show();
+function cyaskeditorsubmit(){editor.data();}
+</script>
+<br />{lang menu_collect_intro}
+</td></tr>
+<!--{/if}-->
+<tr valign="middle">
+<td width="10%" height="35" class="f14">{lang menu_collect_type}:</td>
+<td width="90%"><select name="ctype">
+<option value="1">{lang menu_collect_class1}</option>
+<option value="2" <!--{if $neturl}-->selected<!--{/if}--> >{lang menu_collect_class2}</option>
+</select></td></tr>
+<tr valign="middle">
+<td width="10%" height="35" class="f14">{lang menu_public}:</td>
+<td width="90%"><input type="checkbox" name="public" checked value="1" /></td></tr>
+<tr valign="middle">
+<td width="10%" height="50" valign="middle">&nbsp;</td>
+<td width="90%" height="50" valign="middle">
+<input type="hidden" name="command" value="collect" />
+<input type="hidden" name="url" value="{$url}" />
+<input type="hidden" name="formhash" value="{echo form_hash()}" />
+<input type="submit" value="{lang button_submit}" name="collectsubmit" <!--{if $neturl}-->onclick="cyaskeditorsubmit()"<!--{/if}--> class="bnsrh" />&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=button value="{lang button_notdo}" name="Submit3" onClick="history.back();" class="bnsrh" />
+</td></tr>
+</table>
+</form>
+<br />
+</div>
+</div>
+</div>
+</div>
+{template footer}
