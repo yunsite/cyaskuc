@@ -52,7 +52,7 @@
 <div><font class="f14"><a href="{$web_path}member.php?uid={$answer['uid']}" target="_blank"><u>{$answer['username']}{lang ques_of_answer}</u></a></div>
 <br />
 <div class="f14">{$answer['answer']}</div>
-<div class="f13" align="right"><a href="{$web_path}response.php?aid={$answer['aid']}#response">{$answer['response']}&nbsp;{lang menu_answer_response}</a>&nbsp;&nbsp;{lang menu_answer_time}：{$answer['time']}&nbsp;</div>
+<div class="f13" align="right"><a href="{$web_path}response.php?aid={$answer['aid']}#response">{$answer['response']}&nbsp;{lang menu_answer_response}</a>&nbsp;&nbsp;{lang menu_answer_time}:{$answer['time']}&nbsp;</div>
 <!--{if $ques_allowhandle}-->
 <div>
 <form name="adopt{$answer['aid']}" action="{$web_path}handle.php" method="post">
