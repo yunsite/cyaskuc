@@ -20,6 +20,7 @@ $lang = array
 	'ques_overdue'=>"抱歉，您有 {$overdue_count} 个过期问题，请先解决吧",
 	
 	'login_invalid' => '用户名无效',
+	'login_password_error' =>'用户或密码错误',
 	'login_strike' => '累计 5 次错误尝试，15 分钟内您将不能登录论坛。',
 	'login_secques' => '您设置了安全提问，请输入正确的提问和回答后才能登录。',
 	'login_url_error'	=> '无效访问，请返回。',
