@@ -48,11 +48,14 @@ function parse_emailmessage(data)
 		did.innerHTML='<font size="2" color="red">{lang warning_data_checking}</font>';
 	}
 }
-
+function _esc(a)
+{
+	return window.encodeURIComponent?encodeURIComponent(a):escape(a)
+}
 function check_username(f)
 {
 	var did=document.getElementById("usernametip");
-	var url='usercheck.php?username='+f.username.value;
+	var url='usercheck.php?username='+_esc(f.username.value);
 	if(f.username.value=="")
 	{
 		did.innerHTML='<font size="2" color="red">{lang warning_username_null}</font>';
