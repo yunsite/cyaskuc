@@ -20,6 +20,7 @@ $lang = array
 	'ques_overdue'=>"抱歉，您有 {$overdue_count} 个过期问题，请先解决吧",
 	
 	'login_invalid' => '用户名无效',
+	'login_password_error' =>'用户或密码错误',
 	'login_strike' => '累计 5 次错误尝试，15 分钟内您将不能登录论坛。',
 	'login_secques' => '您设置了安全提问，请输入正确的提问和回答后才能登录。',
 	'login_url_error'	=> '无效访问，请返回。',
@@ -27,7 +28,8 @@ $lang = array
 	'login_succeed_admin' => "管理员：<b>{$cyask_user}</b>，欢迎您回来，现在将转入管理页面。",
 	'login_succeed_noactive_member' => "<b>{$cyask_user}</b> : 欢迎您回来，您的帐号处于非激活状态，现在将转入控制面板。",
 	'logout_succeed' => "您已退出{$site_name}，现在将以游客身份转入退出前页面。{$synlogout}",
-
+	
+	
 	'regist_name_error'=>'抱歉！您输入的用户名含有非法字符，请使用英文字母或中文。',
 	'regist_name_used'=>'抱歉！您输入的用户名已经被别人使用，请换用其他用户名吧。',
 	'regist_email_error4'=>'Email 格式有误',
