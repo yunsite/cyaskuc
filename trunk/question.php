@@ -50,6 +50,7 @@ if($question['sid3'])
 	$toplink='<a class="question" href="./browse.php?sortid='.$menu['sid1'].'">'.$menu['sort1'].'</a> &gt;&gt; <a class="question" href="./browse.php?sortid='.$menu['sid2'].'">'.$menu['sort2'].'</a> &gt;&gt; <a class="question" href="./browse.php?sortid='.$menu['sid'].'">'.$menu['sort3'].'</a>';
 	$query=$dblink->query("SELECT qid,title FROM {$dbprefix}ques WHERE sid3=$question[sid3] ORDER BY answercount desc,clickcount desc limit 6");
 	$sid_more=$question['sid3'];
+	$title.='-'.$menu['sort3'].'-'.$menu['sort2'].'-'.$menu['sort1'];
 }
 elseif($question['sid2'])
 {
@@ -58,6 +59,7 @@ elseif($question['sid2'])
 	$toplink='<a class="question" href="./browse.php?sortid='.$menu['sid1'].'">'.$menu['sort1'].'</a> &gt;&gt; <a class="question" href="./browse.php?sortid='.$menu['sid'].'">'.$menu['sort2'].'</a>';
 	$query=$dblink->query("SELECT qid,title FROM {$dbprefix}ques WHERE sid2=$question[sid2] ORDER BY answercount desc,clickcount desc limit 6");
 	$sid_more=$question['sid2'];
+	$title.='-'.$menu['sort2'].'-'.$menu['sort1'];
 }
 elseif($question['sid1'])
 {
@@ -66,6 +68,7 @@ elseif($question['sid1'])
 	$toplink='<a class="question" href="./browse.php?sortid='.$menu['sid'].'">'.$menu['sort1'].'</a>';
 	$query=$dblink->query("SELECT qid,title FROM {$dbprefix}ques WHERE sid1=$question[sid1] ORDER BY answercount desc,clickcount desc limit 6");
 	$sid_more=$question['sid1'];
+	$title.='-'.$menu['sort1'];
 }
 $i=1;
 while($ques_tmp=$dblink->fetch_array($query))
