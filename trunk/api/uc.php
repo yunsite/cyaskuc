@@ -8,12 +8,12 @@ define('API_SYNLOGIN', 1);
 define('API_SYNLOGOUT', 1);
 define('API_UPDATEPW', 1);
 define('API_UPDATEBADWORDS', 1);
-define('API_UPDATEHOSTS', 0);
+define('API_UPDATEHOSTS', 1);
 define('API_UPDATEAPPS', 1);
-define('API_UPDATECLIENT', 0);
-define('API_UPDATECREDIT', 0);
-define('API_GETCREDITSETTINGS', 0);
-define('API_UPDATECREDITSETTINGS', 0);
+define('API_UPDATECLIENT', 1);
+define('API_UPDATECREDIT', 1);
+define('API_GETCREDITSETTINGS', 1);
+define('API_UPDATECREDITSETTINGS', 1);
 
 define('API_RETURN_SUCCEED', '1');
 define('API_RETURN_FAILED', '-1');
@@ -40,11 +40,11 @@ if(MAGIC_QUOTES_GPC) {
 		$get[$key] = stripslashes($val);
 	}
 }
-define('API_DEBUG',0);
+define('API_DEBUG',1);
 if(defined('API_DEBUG') && API_DEBUG)
 {
 	$logfile=DISCUZ_ROOT.'./api/api.log';
-	$get['aaaaaaaaa']=$_SERVER['QUERY_STRING'];
+	$get['debu_url']=$_SERVER['QUERY_STRING'];
 	!file_exists($logfile) && @touch(DISCUZ_ROOT.'./api/api.log');
 	$str=file_get_contents($logfile);
 	$str=date('Y-m-d H:i:s')."\n".var_export($get,TRUE)."\n\n".$str;
@@ -200,19 +200,63 @@ if($action == 'test') {
 } elseif($action == 'updatecredit') {
 
 	!UPDATECREDIT && exit(API_RETURN_FORBIDDEN);
-
+	$credit = intval($get['credit']);
+	$amount = intval($get['amount']);
+	$uid = intval($get['uid']);
+	require_once DISCUZ_ROOT.'./include/db_'.$database.'.php';
+	$dblink = new db_sql;
+	$dblink->connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect);
+	unset($dbhost, $dbuser, $dbpw, $dbname, $pconnect);
+	$dblink->query("UPDATE {$dbprefix}members SET scores=scores+'$amount' WHERE uid='$uid'");
+	if($amount>0)
+	{
+		$add=$amount;
+		$minus=0;
+	}else
+	{
+		$add=0;
+		$minus=$amount;
+	}
+	$query=$dblink->query("SEELCT scores FROM {$dbprefix}members WHERE uid='$uid'");
+	$row=$dblink->fetch_array($query);
+	$time=time();
+	$scores=$row['scores'];
+	unset($query,$row);
+	$dblink->query("INSERT INTO {$dbprefix}scorelog(uid,optime,add,minus,op,scores,opuid) VALUES('$uid','$time','$add','$minus','$op','$scores','$opuid')");
+	
 	exit(API_RETURN_SUCCEED);
 
 } elseif($action == 'getcreditsettings') {
 
 	!GETCREDITSETTINGS && exit(API_RETURN_FORBIDDEN);
-
+	include_once DISCUZ_ROOT.'templates/default/templates.'.$charset.'.lang.php';
+	$credits=array(
+        '1' => array($lang['menu_score'],''),
+		);	
 	echo uc_serialize($credits);
 
 } elseif($action == 'updatecreditsettings') {
 
 	!API_UPDATECREDITSETTINGS && exit(API_RETURN_FORBIDDEN);
-
+	$outextcredits = array();
+	foreach($get['credit'] as $appid => $credititems) {
+		if($appid == UC_APPID) {
+			foreach($credititems as $value) {
+				$outextcredits[$value['appiddesc'].'|'.$value['creditdesc']] = array(
+					'creditsrc' => $value['creditsrc'],
+					'title' => $value['title'],
+					'unit' => $value['unit'],
+					'ratio' => $value['ratio']
+				);
+			}
+		}
+	}
+	$cachefile = DISCUZ_ROOT.'./uc_client/data/cache/creditsettings.php';
+	$fp = fopen($cachefile, 'w');
+	$s = "<?php\r\n";
+	$s .= '$_CACHE[\'creditsettings\'] = '.var_export($outextcredits, TRUE).";\r\n";
+	fwrite($fp, $s);
+	fclose($fp);
 	exit(API_RETURN_SUCCEED);
 
 } else {
@@ -288,4 +332,16 @@ function uc_unserialize($s) {
 	include_once UC_CLIENT_ROOT.'./lib/xml.class.php';
 	return xml_unserialize($s);
 }
+function language($file,$tpldir='templates/default',$styleid=1)
+{
+	global $charset;
+	$templateid = $styleid;
+	$languagepack = CYASK_ROOT.'./'.$tpldir.'/'.$file.'.'.$charset.'.lang.php';
+	if(file_exists($languagepack))
+	{
+		return $languagepack;
+	}
+	return FALSE;
+}
+
 ?>
