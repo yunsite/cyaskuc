@@ -773,7 +773,7 @@ elseif($action == 'environment')
 	$curr_os = PHP_OS;
 
 	$curr_php_version = PHP_VERSION;
-	if($curr_php_version < '4.3.5')
+	if(check_version($curr_php_version))
 	{
 		$msg .= "<font color=\"#FF0000\">$lang[php_version_435]</font>\t";
 		$quit = TRUE;
@@ -1595,5 +1595,29 @@ function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $
 		@fclose($fp);
 		return $return;
 	}
+}
+function check_viersion($ver)
+{
+	$tmp1=explode('.',$ver);
+	if(intval($tmp[0])>4)
+	{
+		return true;
+	}elseif(intval($tmp[0])<4)
+	{
+		return false;
+	}elseif(intval($tmp[1])>3)
+	{
+		return false;
+	}elseif(intval($tmp[1])<3)
+	{
+		return false;
+	}elseif(intval($tmp[2])>=5)
+	{
+		return true;
+	}else
+	{
+		return false;
+	}
+	
 }
 ?>
