@@ -62,6 +62,11 @@ function parse_message(data)
 <div id="main">
 <div id="usrbar">
 <nobr>
+<span id="app_menu" style="float:left; padding-left:2em">
+<!--{loop $_CACHE['apps'] $k $app}-->
+		&nbsp;<a href="{$app[url]}" target="_blank"><img src="{$web_path}{$styledir}/xt.gif" border="0" /><img src="{$web_path}{$styledir}/xt.gif" border="0" />{$app[name]}</a>&nbsp;
+<!--{/loop}-->
+</span>
 <script type="text/javascript">
 <!--
 var now = new Date();
