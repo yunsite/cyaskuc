@@ -18,6 +18,13 @@ require_once CYASK_ROOT.'./include/db_'.$database.'.php';
 
 require_once CYASK_ROOT.'./uc_client/client.php';
 
+file_exists(CYASK_ROOT.'./uc_client/data/cache/apps.php') &&include_once(CYASK_ROOT.'./uc_client/data/cache/apps.php');
+if(isset($_CACHE['apps']))
+	rsort($_CACHE['apps']);
+else
+	$_CACHE['apps']=rsort(uc_app_ls());
+
+
 if(!defined('CURSCRIPT'))
 {
 	exit('CURSCRIPT ERROR');
