@@ -249,14 +249,15 @@ elseif($command=='readmsg')
 {
 	$mid=intval($_GET['mid']);
 	
-	$msg=uc_pm_view($cyask_uid,$mid);
-
-	
+	$tmp=uc_pm_view($cyask_uid,$mid);
+	$msg=$tmp[0];
+	unset($tmp);
+	$msg['dateline']=date("Y-m-d H:i:s",$msg['dateline']);
 }
 elseif($command=='replymsg')
 {
 	$msguid=intval($_POST['fromuid']);
-	$num=uc_pm_send($cyask_uid,$_POST['username'],$_POST['title'],$_POST['content'],1,$_POST['pmid'],1);
+	$num=uc_pm_send($cyask_uid,$_POST['fromuid'],$_POST['title'],$_POST['content'],1,$_POST['pmid'],0);
 	if($num>0)
 	{
 		$backurl='my.php?command=mymessage';
