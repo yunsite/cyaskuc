@@ -1598,7 +1598,7 @@ function dfopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $
 }
 function check_version($ver)
 {
-	$tmp1=explode('.',$ver);
+	$tmp=explode('.',$ver);
 	if(intval($tmp[0])>4)
 	{
 		return true;
