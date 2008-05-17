@@ -112,7 +112,7 @@ elseif($command=='answer_adopt_submit')
 		$feed['title_data'] = array('username'=>$cyask_user,'ausername'=>$answer['username']);
 		$feed['body_template'] = '<b>{subject}</b><br>{message}';
 		$feed['body_data'] = array(
-			'subject' => "<a href=\"".$baseurl."question.php?qid=".$ques['qid']."\">{$ques['title']}</a>",
+			'subject' => "<a href=\"".$baseurl."/question.php?qid=".$ques['qid']."\">{$ques['title']}</a>",
 			'message' => cut_str(strip_tags(preg_replace("/\[.+?\]/is", '', $answer['answer'])), 150)
 		);
 		
