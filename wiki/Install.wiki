@@ -15,6 +15,6 @@
 
 安装过程
   # 首先要确认您已经成功的安装了UCenter 1.0版本，并记住您的 UCENTER的安装地址和创建人密码
-  # 将你使用的UCENTER对应版本的client复制到根目录下并命名为uc_client
+  # *将你使用的UCENTER对应版本的client复制到根目录下并命名为uc_client*
   # 将Cyask所有文件上传到服务器空间后，输入安装地址进行自动安装，例如：http://www.xxx.com/install.php  在安装向导的帮助下，您只需要填写相关设置即可完成安装。
 软件安装完毕后，建议您即时删除 install.php文件和install目录，防止您的数据被再次覆盖和损坏。
